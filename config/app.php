@@ -183,6 +183,7 @@ return [
 
         \Kevupton\LaravelCoinpayments\Providers\LaravelCoinpaymentsServiceProvider::class,
         \Kevupton\LaravelJsonResponse\Providers\LaravelJsonResponseProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*
