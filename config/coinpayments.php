@@ -26,4 +26,10 @@ return array(
 
     // ALL logs all requests, ERROR logs only errors, and NONE never
     'log_level' => Log::LEVEL_ERROR,
+
+    // Whether or not to have coinpayments automatically parse IPN's for you. If so please specify a PATH
+    'route'           => [
+        'enabled' => env('COINPAYMENTS_IPN_ROUTE_ENABLED', false),
+        'path'    => env('COINPAYMENTS_IPN_ROUTE_PATH', '/api/ipn'),
+    ],
 );
