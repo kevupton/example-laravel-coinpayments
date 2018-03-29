@@ -2,8 +2,7 @@
 
 namespace App\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Kevupton\LaravelCoinpayments\Events\Deposit\DepositComplete;
 
 class OnDepositComplete
 {
@@ -12,7 +11,7 @@ class OnDepositComplete
      *
      * @return void
      */
-    public function __construct()
+    public function __construct ()
     {
         //
     }
@@ -20,11 +19,12 @@ class OnDepositComplete
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param DepositComplete $event
      * @return void
      */
-    public function handle($event)
+    public function handle (DepositComplete $event)
     {
-        //
+        \Log::info("\n>>\tDEPOSIT COMPLETED");
+        \Log::info($event->deposit->toJson(JSON_PRETTY_PRINT));
     }
 }

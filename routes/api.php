@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('purchase', 'CoinpaymentsController@purchaseItems');
-Route::post('donate', 'CoinpaymentsController@donation');
+Route::post('donation', 'CoinpaymentsController@donation');
 Route::post('ipn-manual', 'CoinpaymentsController@validateIpn');
 Route::get('address', 'CoinpaymentsController@getCallbackAddress');

@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
+use App\Listeners\OnDepositComplete;
+use App\Listeners\OnTransactionComplete;
+use App\Listeners\OnWithdrawalComplete;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Kevupton\LaravelCoinpayments\Events\Deposit\DepositComplete;
+use Kevupton\LaravelCoinpayments\Events\Transaction\TransactionComplete;
+use Kevupton\LaravelCoinpayments\Events\Withdrawal\WithdrawalComplete;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -16,6 +21,15 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
+        DepositComplete::class => [
+            OnDepositComplete::class
+        ],
+        TransactionComplete::class => [
+            OnTransactionComplete::class
+        ],
+        WithdrawalComplete::class => [
+            OnWithdrawalComplete::class
+        ]
     ];
 
     /**
@@ -26,7 +40,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }

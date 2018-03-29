@@ -108,10 +108,10 @@ class CoinpaymentsController extends Controller
     public function getCallbackAddress (Request $request)
     {
         $this->validate($request, [
-            'currency' => 'string|required',
+            'currency' => 'string|in:DGB,ETH,BTC,LTC',
         ]);
 
-        $currency = $request->get('currency');
+        $currency = $request->get('currency', 'DGB');
 
         return \Coinpayments::getCallbackAddress($currency);
     }
