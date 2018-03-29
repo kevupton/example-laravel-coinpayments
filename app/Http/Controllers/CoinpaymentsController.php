@@ -74,7 +74,8 @@ class CoinpaymentsController extends Controller
     }
 
     /**
-     * Handled on callback of IPN
+     * The manual approach to IPNS.
+     * Please look at events for a nicer, cleaner event driven approach.
      *
      * @param Request $request
      */
@@ -83,6 +84,7 @@ class CoinpaymentsController extends Controller
         try {
             /** @var Ipn $ipn */
             $ipn = \Coinpayments::validateIPNRequest($request);
+
 
             // if the ipn came from the API side of coinpayments merchant
             if ($ipn->isApi()) {
@@ -95,12 +97,22 @@ class CoinpaymentsController extends Controller
                 // do something here
                 // Payment::find($ipn->txn_id);
             }
-        }
-        catch (IpnIncompleteException $e) {
+        } catch (IpnIncompleteException $e) {
             $ipn = $e->getIpn();
             /*
              * Can do something here with the IPN model if desired.
              */
         }
+    }
+
+    public function getCallbackAddress (Request $request)
+    {
+        $this->validate($request, [
+            'currency' => 'string|in:DGB,ETH,BTC,LTC',
+        ]);
+
+        $currency = $request->get('currency', 'DGB');
+
+        return \Coinpayments::getCallbackAddress($currency);
     }
 }

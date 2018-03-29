@@ -30,6 +30,8 @@ COINPAYMENTS_PRIVATE_KEY=generated_private_key
 COINPAYMENTS_IPN_SECRET=your_custom_ipn_secret
 COINPAYMENTS_IPN_URL=http://YOUR-ADDRESS/api/ipn
 COINPAYMENTS_API_FORMAT=json
+COINPAYMENTS_IPN_ROUTE_ENABLED=true
+COINPAYMENTS_IPN_ROUTE_PATH=/api/ipn
 ```
 
 ***Note:*** *get  your keys and ipn secret from the coinpayments website. You will need to setup an IPN secret manually.*
@@ -60,3 +62,14 @@ curl -X POST \
   -F amount=1000 \
   -F currency=ETH
 ```
+
+Getting a callback address
+```bash
+curl -X GET \
+  http://localhost/coinpayments-example/public/api/address?currency=DGB \
+  -H 'cache-control: no-cache'
+```
+
+### Output
+The output of each event is printed inside of `storage/logs/laravel.log`.
+Check out the log to see what each event receives.
